@@ -1,0 +1,49 @@
+classDiagram
+    %% === CLASS DEFINITIONS ===
+
+    class Main {
+        +main(String[] args)
+    }
+
+    class Player {
+        -String nama
+        -int totalMenang
+        -boolean isVIP
+        -boolean hasSpyCard
+        -boolean spyNextRound
+
+        +Player(String, boolean)
+        +getNama(): String
+        +getTotalMenang(): int
+        +tambahMenang(): void
+        +isVIP(): boolean
+        +hasSpyCard(): boolean
+        +gunakanSpyCard(): void
+        +isSpyNextRound(): boolean
+        +setSpyNextRound(boolean): void
+    }
+
+    class Match {
+        -String[] pilihan
+        -Map~String, Integer~ statistik
+        -Scanner scanner
+
+        +mainkanMatch(Player, Player): Player
+        +getStatistik(): Map~String, Integer~
+    }
+
+    class Turnamen {
+        +tampilkanSkor(List~Player~): void
+        +tampilkanStatistik(Map~String, Integer~): void
+    }
+
+    %% === RELATIONSHIPS ===
+
+    Main --> Player : "membuat dan mengelola"
+    Main --> Match : "memanggil mainkanMatch()"
+    Main --> Turnamen : "menampilkan skor dan statistik"
+
+    Match --> Player : "mengakses data pemain\n(getNama, isVIP, dll)"
+    Turnamen --> Player : "mengambil data kemenangan"
+
+    %% Note: Tidak ada inheritance
